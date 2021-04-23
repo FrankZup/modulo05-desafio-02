@@ -68,6 +68,10 @@ public class ContatoService {
 
     public void deletarContato(String email){
         Contato contato = buscarContatoPeloEmail(email);
+
+        contato.setProdutos(null);
+        contatoRepository.save(contato);
+
         contatoRepository.delete(contato);
     }
 

@@ -1,19 +1,21 @@
 package br.com.zup.sistemamarketing.services;
 
 import br.com.zup.sistemamarketing.exceptions.CategoriaNaoExisteException;
+import br.com.zup.sistemamarketing.exceptions.ExcluirCategoriaException;
 import br.com.zup.sistemamarketing.models.Categoria;
 import br.com.zup.sistemamarketing.repositories.CategoriaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
 public class CategoriaService {
-    private final CategoriaRepository categoriaRepository;
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
-    public CategoriaService(CategoriaRepository categoriaRepository) {
-        this.categoriaRepository = categoriaRepository;
-    }
+    @Autowired
+    private ProdutoService produtoService;
 
     public Categoria salvarCategoria(Categoria categoria){
         return categoriaRepository.save(categoria);
@@ -42,6 +44,10 @@ public class CategoriaService {
 
     public void deletarCategoria(int id){
         Categoria categoria = buscarCategoriaPeloId(id);
+
+        if (produtoService.pesquisarProdutoPorCategoria(categoria.getNome())){
+            throw new ExcluirCategoriaException();
+        }
 
         categoriaRepository.delete(categoria);
     }

@@ -2,6 +2,7 @@ package br.com.zup.sistemamarketing.services;
 
 import br.com.zup.sistemamarketing.exceptions.CategoriaNaoExisteException;
 import br.com.zup.sistemamarketing.exceptions.ExcecaoBasica;
+import br.com.zup.sistemamarketing.exceptions.ExcluirCategoriaException;
 import br.com.zup.sistemamarketing.models.Categoria;
 import br.com.zup.sistemamarketing.repositories.CategoriaRepository;
 import org.junit.jupiter.api.Assertions;
@@ -11,6 +12,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import static org.mockito.Mockito.*;
 
 import java.util.Optional;
 
@@ -96,31 +98,6 @@ public class CategoriaServiceTest {
 
         ExcecaoBasica excecao = Assertions.assertThrows(CategoriaNaoExisteException.class, () -> {
             categoriaService.atualizarCategoria(categoriaAtualizada);
-        });
-
-        Assertions.assertEquals(404, excecao.getStatus());
-        Assertions.assertEquals("Categoria não existe!", excecao.getMessage());
-
-    }
-
-    @Test
-    public void testarDeletarCategoriaCamihoBom(){
-        Optional<Categoria> optionalCategoria = Optional.of(this.categoria);
-        Mockito.doNothing().when(categoriaRepository).delete(Mockito.any());
-
-        Mockito.when(categoriaRepository.findById(Mockito.anyInt())).thenReturn(optionalCategoria);
-
-        categoriaService.deletarCategoria(1);
-        Mockito.verify(categoriaRepository, Mockito.times(1)).delete(categoria);
-    }
-
-    @Test
-    public void testarDeletarCategoriaCamihoRuim(){
-        Optional<Categoria> optionalCategoria = Optional.empty();
-        Mockito.when(categoriaRepository.findById(Mockito.anyInt())).thenReturn(optionalCategoria);
-
-        ExcecaoBasica excecao = Assertions.assertThrows(CategoriaNaoExisteException.class, () -> {
-            categoriaService.deletarCategoria(100);
         });
 
         Assertions.assertEquals(404, excecao.getStatus());

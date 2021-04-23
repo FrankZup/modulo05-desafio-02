@@ -52,6 +52,10 @@ public class ProdutoService {
 
     public void deletarProduto(int id){
         Produto produto = buscarProdutoPeloId(id);
+
+        produto.setCategorias(null);
+
+        produtoRepository.save(produto);
         produtoRepository.delete(produto);
     }
 
@@ -65,5 +69,9 @@ public class ProdutoService {
         }
 
         return adcionarCategoriaAoProduto;
+    }
+
+    public boolean pesquisarProdutoPorCategoria(String nome){
+        return produtoRepository.existsByCategoriasNome(nome);
     }
 }
