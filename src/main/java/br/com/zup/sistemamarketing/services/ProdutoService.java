@@ -1,5 +1,6 @@
 package br.com.zup.sistemamarketing.services;
 
+import br.com.zup.sistemamarketing.exceptions.ProdutoNaoExisteException;
 import br.com.zup.sistemamarketing.models.Categoria;
 import br.com.zup.sistemamarketing.models.Produto;
 import br.com.zup.sistemamarketing.repositories.ProdutoRepository;
