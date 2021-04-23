@@ -1,5 +1,7 @@
 package br.com.zup.sistemamarketing.exceptions;
 
+import java.util.List;
+
 public class RespostaErro {
     private String tipoErro;
     private int codigo;
