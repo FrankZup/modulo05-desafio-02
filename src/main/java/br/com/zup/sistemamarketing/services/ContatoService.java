@@ -2,6 +2,7 @@ package br.com.zup.sistemamarketing.services;
 
 import br.com.zup.sistemamarketing.DTOs.contato.filtro.FiltroContatoPorCategoria;
 import br.com.zup.sistemamarketing.DTOs.contato.filtro.FiltroContatoPorProduto;
+import br.com.zup.sistemamarketing.exceptions.ContatoNaoExisteException;
 import br.com.zup.sistemamarketing.models.Contato;
 import br.com.zup.sistemamarketing.models.Produto;
 import br.com.zup.sistemamarketing.repositories.ContatoRepository;
