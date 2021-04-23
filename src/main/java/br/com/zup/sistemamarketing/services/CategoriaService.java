@@ -1,5 +1,6 @@
 package br.com.zup.sistemamarketing.services;
 
+import br.com.zup.sistemamarketing.exceptions.CategoriaNaoExisteException;
 import br.com.zup.sistemamarketing.models.Categoria;
 import br.com.zup.sistemamarketing.repositories.CategoriaRepository;
 import org.springframework.stereotype.Service;
